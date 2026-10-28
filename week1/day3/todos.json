@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "taskName": "Call mom",
+    "completed": true,
+    "deleted": false
+  },
+  {
+    "id": 2,
+    "taskName": "Buy milk",
+    "completed": false,
+    "deleted": false
+  }
+]
