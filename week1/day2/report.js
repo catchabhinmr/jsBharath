@@ -8,12 +8,18 @@ const expenses = [
   { description: "Concert", amount: 55, category: "fun", date: "2026-10-03" },
   { description: "Coffee", amount: 5.5, category: "food", date: "2026-10-04" },
 ];
-total = expenses.reduce((sum, e) => sum + e.amount, 0);
+const total = expenses.reduce((sum, e) => sum + e.amount, 0);
 //by category
-totalHousing = expenses.filter(e => e.category === "housing").reduce((sum, e) => sum + e.amount, 0);
-totalTransport = expenses.filter(e => e.category === "transport").reduce((sum, e) => sum + e.amount, 0);
-totalFun = expenses.filter(e => e.category === "fun").reduce((sum, e) => sum + e.amount, 0);
-totalFood = expenses.filter(e => e.category === "food").reduce((sum, e) => sum + e.amount, 0);
+const totalHousing = expenses.filter(e => e.category === "housing").reduce((sum, e) => sum + e.amount, 0);
+const totalTransport = expenses.filter(e => e.category === "transport").reduce((sum, e) => sum + e.amount, 0);
+const totalFun = expenses.filter(e => e.category === "fun").reduce((sum, e) => sum + e.amount, 0);
+const totalFood = expenses.filter(e => e.category === "food").reduce((sum, e) => sum + e.amount, 0);
+//another way to group each category
+const categoryList = expenses.reduce(category, e => {
+  category[e.category] = category[e.category] || 0 + e.amount;
+  return category;
+}, {});
+
 
 //Largest
 largestRent = expenses.reduce((maximum, e) => Math.max(maximum, e.amount), -Infinity);
