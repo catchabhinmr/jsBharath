@@ -54,5 +54,6 @@ else if(folder){
         count[category] = (count[category]??0)+1;
     }
     const summary = Object.entries(count).map(([k,v])=>`${k}:${v}`);
-    console.log(`Summary: ${summary.join(", ")} -  moved`);
+    const total = Object.values(count).reduce((a,b)=>(a+b,0));
+    console.log(`Summary: ${summary.join(", ")} - ${total} moved`);
 }
