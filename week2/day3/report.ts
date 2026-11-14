@@ -1,0 +1,41 @@
+type Category = "housing" | "food" | "transport" | "fun";
+
+interface Expense {
+  description: string;
+  amount: number;
+  category: Category;
+  date: string;
+}
+
+const expenses: Expense[] = [
+  { description: "Rent", amount: 1200, category: "housing", date: "2026-09-01" },
+  { description: "Groceries", amount: 84.5, category: "food", date: "2026-09-03" },
+  { description: "Coffee", amount: 4.75, category: "food", date: "2026-09-04" },
+  { description: "Bus pass", amount: 64, category: "transport", date: "2026-09-05" },
+  { description: "Rent", amount: 1200, category: "housing", date: "2026-10-01" },
+  { description: "Groceries", amount: 97.25, category: "food", date: "2026-10-02" },
+  { description: "Concert", amount: 55, category: "fun", date: "2026-10-03" },
+  { description: "Coffee", amount: 5.5, category: "food", date: "2026-10-04" },
+];
+const total: number = expenses.reduce((sum, e) => sum + e.amount, 0);
+//by category
+const totalHousing: number = expenses.filter(e => e.category === "housing").reduce((sum, e) => sum + e.amount, 0);
+const totalTransport: number = expenses.filter(e => e.category === "transport").reduce((sum, e) => sum + e.amount, 0);
+const totalFun: number = expenses.filter(e => e.category === "fun").reduce((sum, e) => sum + e.amount, 0);
+const totalFood: number = expenses.filter(e => e.category === "food").reduce((sum, e) => sum + e.amount, 0);
+//another way to group each category
+const categoryList = expenses.reduce<Partial<Record<Category, number>>>((category, e) => {
+  category[e.category] = (category[e.category] || 0) + e.amount;
+  return category;
+}, {});
+
+
+//Largest
+const largestRent: number = expenses.reduce((maximum, e) => Math.max(maximum, e.amount), -Infinity);
+console.log(`Total: ${total.toFixed(2)}`);
+console.log("By Category:");
+console.log(`  housing`.padEnd(10) + `${totalHousing.toFixed(2)}`.padStart(10));
+console.log(`  food`.padEnd(10) + `${totalFood.toFixed(2)}`.padStart(10));
+console.log(`  transport`.padEnd(10) + `${totalTransport.toFixed(2)}`.padStart(10));
+console.log(`  fun`.padEnd(10) + `${totalFun.toFixed(2)}`.padStart(10));
+console.log(`Largest: Rent (${largestRent})`);
